@@ -9,7 +9,7 @@ public class BankTransactionAnalyserSimple {
 
     public static void main (final String...args) throws IOException{
 
-        final Path path = Path.get(RESOURCES + args[0]);
+        final Path path = Paths.get(RESOURCES + args[0]);
         final List<String> lines = Files.readAllLines(path);
         double total = 0d;
 
