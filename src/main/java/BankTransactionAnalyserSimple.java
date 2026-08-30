@@ -3,8 +3,11 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.LocalDate;
+import java.time.Month;
 import java.time.format.DateTimeFormatter;
+import java.time.format.TextStyle;
 import java.util.List;
+import java.util.Locale;
 
 public class BankTransactionAnalyserSimple {
     private static final String RESOURCES = "src/main/resources/";
@@ -33,6 +36,8 @@ public class BankTransactionAnalyserSimple {
 
         } else {
 
+            final String nomeMes = Month.of(Integer.parseInt(mes)).getDisplayName(TextStyle.FULL, Locale.ENGLISH);
+
             for(final String line : lines){
             final String[] columns = line.split(",");
             final LocalDate date = LocalDate.parse(columns[0].replace("\uFEFF", ""), DATE_PATTERN);
@@ -41,9 +46,11 @@ public class BankTransactionAnalyserSimple {
                 final double amount = Double.parseDouble(columns[1]);
                 total += amount;
             }
+            
             }
+
         
-            System.out.println("The total for all transactions in the requested month is: $" + total);
+            System.out.println("The total for all transactions in " + nomeMes + " is: $" + total);
 
         }
 
